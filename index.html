@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Nguyễn Bảo Duy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body> 
+  <div class="wrapper">
+    <div class="top">
+      <img src="https://i.postimg.cc/pVwbkT8K/1041916.png" alt="">
+      <h3>ChatBot</h3>
+    </div>
+    <div class="type">
+      <input autofocus oninput="textinput()" type="text" name="" id="type" placeholder="type any message">
+      <img onclick="sendmsg()" src="https://i.postimg.cc/0y5tCRtp/3060014.png" alt="wait.." />
+    </div>
+    <div id="messages">
+      <ul id="chat">
+        
+      </ul>
+    </div>
+  </div>
+  
+  
+  
+  
+  <script>
+  function soundrep(){
+      
+  audio.play();
+  }
+  let type=document.getElementById("type");
+  let text;
+    function textinput(){
+       text=type.value;
+    }
+  function sendmsg(){
+    
+  let msg=document.getElementById('chat');
+  
+   const node = document.createElement("li");
+
+
+node.innerHTML=text;
+
+
+msg.appendChild(node);
+console.log()
+
+let data = text.replace(/\s/g, "");
+data=data.toLowerCase();
+  fetch("https://raw.githubusercontent.com/Shiva-suryavanshi/response/gh-pages/api.json").then((res) => {
+    return res.json();
+  }).then((response) => {
+    const nodeReply = document.createElement("li");
+    
+    nodeReply.innerHTML=response[data];
+    if(nodeReply.innerHTML=="undefined"){
+      nodeReply.innerHTML="sorry I don't understand";
+    }
+    msg.appendChild(nodeReply);
+    
+  })
+  
+type.value='';
+} 
+
+
+  </script>
+</body>
+</html>
